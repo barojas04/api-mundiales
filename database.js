@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-// Crea o se conecta al archivo de la base de datos
+
 const db = new sqlite3.Database('./mundiales.sqlite', (err) => {
     if (err) {
         console.error('Error al conectar con SQLite:', err.message);
@@ -10,7 +10,7 @@ const db = new sqlite3.Database('./mundiales.sqlite', (err) => {
 });
 
 db.serialize(() => {
-    // Creación de la tabla siguiendo la estructura solicitada
+    
     db.run(`CREATE TABLE IF NOT EXISTS mundiales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre TEXT,
@@ -26,7 +26,7 @@ db.serialize(() => {
         descripcion TEXT
     )`);
 
-    // Poblar la base de datos con 6 ediciones si está vacía
+    
     db.get("SELECT COUNT(*) AS count FROM mundiales", (err, row) => {
         if (row.count === 0) {
             console.log("Poblando la base de datos con 6 ediciones del Mundial...");
